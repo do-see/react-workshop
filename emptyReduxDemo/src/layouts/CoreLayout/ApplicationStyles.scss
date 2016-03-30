@@ -1,0 +1,13 @@
+.application{
+  width: 980px;
+  margin: 0 auto;
+  @media (max-width: 980px) {
+    width: 100%;
+  }
+}
+body {
+  background-color: #dfdfdf;
+  background-image: -webkit-linear-gradient(top,#dddbd1,#d2dbdc);
+  background-image: linear-gradient(to bottom,#dddbd1,#d2dbdc);
+  font-family: 'Roboto',sans-serif;
+}
