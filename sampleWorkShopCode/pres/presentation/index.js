@@ -40,6 +40,8 @@ require("spectacle/lib/themes/default/index.css");
 const images = {
   city: require("../assets/shutterstock_124758646-copy.jpg"),
   me: require("../assets/me.png"),
+  notwant: require("../assets/Screenshot 2016-03-30_16.48.38.png"),
+  wuut: require("../assets/Screen Shot 2016-03-31 at 6.48.39 AM.png"),
   react: require("../assets/react.png"),
   mdesign: require("../assets/mdesign.png"),
   markdown: require("../assets/markdown.png")
@@ -169,6 +171,13 @@ export default class Presentation extends React.Component {
               <Appear><ListItem>Verwendet von  Netflix, Imgur, Feedly, Airbnb, Xpandmmi, ...</ListItem></Appear>
               <Appear><ListItem>Version 0.14.X, bald 15.0.0</ListItem></Appear>
             </List>
+          </Slide>
+          <Slide transition={["slide"]} bgColor="secondary" notes="1. warum jquery nach angular? 2. woher weiss man dass der DOM fertig geladen ist?">
+            <Image src={images.wuut.replace("/", "")} margin="0px auto 40px" width="60%"/>
+            <Image src={images.notwant.replace("/", "")} margin="0px auto 40px" width="100%"/>
+            <Heading size={3} caps fit textColor="primary" textFont="primary">
+              Wuuuut?
+            </Heading>
           </Slide>
           <Slide transition={["fade"]} bgColor="secondary" textColor="primary" notes="heute verwendet von sagen. Anspielung auf wie React denn nun aussieht.">
             <List>
