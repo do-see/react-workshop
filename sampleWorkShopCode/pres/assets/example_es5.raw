@@ -1,0 +1,18 @@
+var configuration = require('./config.js');
+
+var testIfChanged = function(a, b) {
+  return a !== b;
+};
+
+var writeConfig = function(entry, value) {
+  if (typeof configuration === "undefined" || !entry) {
+    return null;
+  }
+  if (testIfChanged(configuration[entry], value)) {
+    configuration.write(entry, value);
+  }
+  return configuration;
+};
+
+//
+//

@@ -1,0 +1,32 @@
+import { Component } from "react";
+
+export class MyOwnClass extends Component {
+  get a() {
+    return "b";
+  }
+}
+const ins: Component = new MyOwnClass();
+
+const hash1 = { a: ins.a, b: "c" };
+// result: { a: "b", b: "c" }
+const hash2 = { ...hash1, b: "d" };
+// result: { a: "b", b: "d" }
+
+const array1 = [1, 2];
+// result: [1,2]
+const array2 = [ ...array1, 3];
+// result: [1,2,3]
+
+array2 = null; // FEHLER!
+
+array2.unshift(0, 1);
+// wuerde zu einem Fehler fuehren. unshift is not a function
+// of undefined
+
+let array3 = []; // OK
+array3 = {}; // OK
+
+Promise.resolve().then(() => {
+  console.log(`Hello, Object: ${hash2}, Array: ${array2}`);
+});
+// anstatt setTimeout!

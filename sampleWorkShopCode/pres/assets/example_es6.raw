@@ -1,0 +1,18 @@
+import configuration from "./config";
+
+const testIfChanged = (a, b) => {
+  return a !== b;
+};
+
+const writeConfig = (entry, value) => {
+  if (typeof configuration === "undefined" || !entry) {
+    return null;
+  }
+  if (testIfChanged(configuration[entry], value)) {
+    configuration.write(entry, value);
+  }
+  return configuration;
+};
+
+//
+//
