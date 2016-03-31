@@ -6,7 +6,7 @@ import TypeSelector from 'components/Theming/TypeSelector'
 export default class ListType extends React.Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
-    value: PropTypes.string,
+    value: PropTypes.array,
     label: PropTypes.string,
     internalId: PropTypes.string
   }

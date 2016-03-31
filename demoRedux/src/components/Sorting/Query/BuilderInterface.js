@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react'
 import Paper from 'material-ui/lib/paper'
-import { loadResults } from '../../../redux/modules/connector'
+import { loadResults, clearSearch } from '../../../redux/modules/connector'
 import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/lib/floating-action-button'
 import ClearSearch from './ClearSearch'
@@ -52,7 +52,7 @@ export class BuilderInterface extends React.Component<void, Props, void> {
           <QueryBuilder />
           <div style={styles.searchActions}>
             <div style={styles.rightSearchActions}>
-              <ClearSearch />
+              <ClearSearch onAction={this.props.clearSearch} />
               <FloatingActionButton
                 primary
                 style={styles.searchLens}
@@ -70,5 +70,6 @@ export class BuilderInterface extends React.Component<void, Props, void> {
 
 const mapStateToProps = (state) => ({})
 export default connect((mapStateToProps), {
-  loadResults
+  loadResults,
+  clearSearch
 })(BuilderInterface)

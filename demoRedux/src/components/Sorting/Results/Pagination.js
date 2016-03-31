@@ -11,7 +11,7 @@ export class Pagination extends React.Component {
   }
   constructor (props) {
     super(props)
-    this.handlePageClick = this.loadPage.bind(this)
+    this.handlePageClick = ::this.loadPage
     this.state = { offset: 0 } // braucht man den counter wo anders?
   }
 

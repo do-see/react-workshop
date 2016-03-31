@@ -11,7 +11,7 @@ export const COUNTER_LOADED = 'COUNTER_LOADED'
 export const CLEAR_SEARCH = 'CLEAR_SEARCH'
 export const APPLY_QUERY = 'APPLY_QUERY'
 export const REMOVE_FROM_QUERY = 'REMOVE_FROM_QUERY'
-
+export const START_LOADING = 'LOAD_START'
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -65,6 +65,12 @@ export function removeFromQuery (index) {
   }
 }
 
+export function startLoading () {
+  return {
+    type: START_LOADING
+  }
+}
+
 function buildQuery (state) {
   if (state.connector.query === undefined) return {}
   return state.connector.query.map((elem) => {
@@ -81,6 +87,7 @@ function buildQuery (state) {
 export const loadResults = (start, size) => {
   return (dispatch, getState): Promise => {
     return new Promise((resolve, reject) => {
+      dispatch(startLoading())
       const query = buildQuery(getState())
       const queryBase = {
         ...config.queryConfig.baseQuery,
@@ -110,8 +117,11 @@ export const loadResults = (start, size) => {
           if (data.aggregations.router_names.router_id) {
             dispatch(changeList('routers', data.aggregations.router_names.router_id.router_id.buckets))
           }
-          dispatch(didReceiveFromRemote(data.hits.hits))
-          resolve()
+          setTimeout(() => {
+            dispatch(didReceiveFromRemote(data.hits.hits))
+            resolve()
+          }, 900)
+
           // Calling the end function will send the request
         })
     })
@@ -125,6 +135,7 @@ export const actions = {
   loadResults,
   clearSearch,
   applyQuery,
+  startLoading,
   removeFromQuery
 }
 
@@ -133,7 +144,9 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [LOAD_FROM_REMOTE]:
-    (state, action) => ({ ...state, searchResults: action.payload }),
+    (state, action) => ({ ...state, loading: false, searchResults: action.payload }),
+  [START_LOADING]:
+    (state, action) => ({ ...state, loading: true }),
   [COUNTER_LOADED]:
     (state, action) => ({ ...state, counters: { [ action.name ]: action.payload } }),
   [APPLY_QUERY]:
@@ -161,6 +174,7 @@ const initialState = {
   counters: { total: 0 },
   query: [],
   lists: {},
+  loading: false,
   searchResults: []
 }
 export default function connectorReducer (state = initialState, action) {

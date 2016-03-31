@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react'
-import Paper from 'material-ui/lib/paper'
 import { connect } from 'react-redux'
-import classes from './Results.scss'
 
 import Table from 'material-ui/lib/table/table'
 import TableHeaderColumn from 'material-ui/lib/table/table-header-column'
@@ -11,7 +9,8 @@ import TableRowColumn from 'material-ui/lib/table/table-row-column'
 import TableBody from 'material-ui/lib/table/table-body'
 import Pagination from './Pagination'
 import config from 'config'
-import { TotalHitsCounter } from 'components'
+import { TotalHitsCounter, AppBlock } from 'components'
+import CircularProgress from 'material-ui/lib/circular-progress'
 
 /**
  * Erwartete Funktionen:
@@ -20,14 +19,15 @@ import { TotalHitsCounter } from 'components'
  **/
 export class ResultsTable extends React.Component {
   static propTypes = {
-    hits: PropTypes.array
+    hits: PropTypes.array,
+    loading: PropTypes.bool
   }
   render () {
-    const { hits } = this.props
+    const { hits, loading } = this.props
     return (
-      <Paper zDepth={1} className={classes.hitCounter}>
-        <strong>Results </strong><TotalHitsCounter />
-        {!hits || !hits.length ? <div>No Hits found. Please hit search</div>
+      <AppBlock label='Results' labelElement={<TotalHitsCounter />}>
+        {loading ? <CircularProgress /> : (
+        !hits || !hits.length ? <div>No Hits found. Please hit search</div>
         : <Table>
           <TableHeader>
             <TableRow>
@@ -43,14 +43,15 @@ export class ResultsTable extends React.Component {
               </TableRow>
             )}
           </TableBody>
-        </Table>}
+        </Table>)}
         <Pagination />
-      </Paper>
+      </AppBlock>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  hits: state.connector.searchResults
+  hits: state.connector.searchResults,
+  loading: state.connector.loading
 })
 export default connect((mapStateToProps), {})(ResultsTable)

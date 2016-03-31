@@ -1,13 +1,17 @@
 import React, { PropTypes } from 'react'
-import classes from './Heading.scss'
 
 export class Heading extends React.Component {
   static propTypes = {
     heading: PropTypes.string.isRequired
   }
   render () {
+    const styles = {
+      heading: {
+        padding: 20
+      }
+    }
     return (
-      <div className={classes.heading}>
+      <div style={styles.heading}>
         <h1>{this.props.heading}</h1>
       </div>
     )

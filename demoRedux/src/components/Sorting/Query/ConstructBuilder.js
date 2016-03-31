@@ -1,5 +1,3 @@
-import { connect } from 'react-redux'
-import { applyQuery } from '../../../redux/modules/connector'
 import { ListType, SearchType } from './Builders'
 import React, { PropTypes } from 'react'
 
@@ -12,22 +10,24 @@ export const TYPE_SEARCH = 'text'
   **/
 export class ConstructBuilder extends React.Component {
   static propTypes = {
-    applyQuery: PropTypes.func.isRequired,
-    queryConfig: PropTypes.object,
-    lists: PropTypes.array
+    onApply: PropTypes.func.isRequired,
+    queryConfig: PropTypes.array,
+    lists: PropTypes.object
   }
-  configEntry (config) {
+  configEntry (config, itid) {
     const { type, id, label } = config
     if (type === TYPE_LIST && this.props.lists !== undefined) {
       return (<ListType
         {...config}
         value={this.props.lists[id]}
         label={label}
-        onChange={this.props.applyQuery} />)
+        key={itid}
+        onChange={this.props.onApply} />)
     } else if (type === TYPE_SEARCH) {
       return (<SearchType
         {...config}
-        onChange={this.props.applyQuery} />)
+        key={itid}
+        onChange={this.props.onApply} />)
     }
     return (<div />)
   }
@@ -35,15 +35,8 @@ export class ConstructBuilder extends React.Component {
   render () {
     return (
       <div style={{display: 'table', width: '100%'}}>
-        {this.props.queryConfig.map((config) => this.configEntry(config))}
+        {this.props.queryConfig.map((config, index) => this.configEntry(config, index))}
       </div>
     )
   }
 }
-
-const mapStateToProps = (state) => ({
-  lists: state.connector.lists
-})
-export default connect((mapStateToProps), {
-  applyQuery
-})(ConstructBuilder)

@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import classes from './Classes/Query.scss'
 import Close from 'material-ui/lib/svg-icons/navigation/close'
 
 export default class Chip extends React.Component {
@@ -32,24 +31,60 @@ export default class Chip extends React.Component {
 
   render () {
     const { highlighted } = this.state
-    const chipStyle = {
-      backgroundColor: (highlighted) ? 'rgb(16,108,200)' : 'rgb(224,224,224)',
-      color: (highlighted) ? 'rgba(255,255,255,0.87)' : 'rgb(66,66,66)'
+    const styles = {
+      chips: {
+        backgroundColor: (highlighted) ? 'rgb(16,108,200)' : 'rgb(224,224,224)',
+        color: (highlighted) ? 'rgba(255,255,255,0.87)' : 'rgb(66,66,66)',
+        cursor: 'default',
+        borderRadius: 16,
+        display: 'block',
+        height: 32,
+        lineHeight: '32px',
+        margin: '8px 8px 0 0',
+        padding: '0 12px',
+        float: 'left',
+        boxSizing: 'border-box',
+        maxWidth: '100%',
+        position: 'relative',
+        paddingRight: 22
+      },
+      chipContent: {
+        display: 'block',
+        float: 'left',
+        whiteSpace: 'nowrap',
+        maxWidth: '100%',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        paddingRight: 4
+      },
+      label: {
+        fontWeight: 500,
+        borderRight: '1px solid rgb(66,66,66)',
+        padding: '0 10px'
+      },
+      value: {
+        fontStyle: 'italic',
+        fontSize: 11,
+        padding: '0 0 0 10px'
+      },
+      removeBtn: {
+        cursor: 'pointer',
+        verticalAlign: 'middle'
+      }
     }
     return (
       <div
-        className={classes.chip}
-        style={chipStyle}
+        style={styles.chips}
         onMouseEnter={this._mouseEnter}
         onMouseLeave={this._mouseLeave}>
-        <span className={classes.chipContent}>
-          <span className={classes.label}>
+        <span style={styles.chipContent}>
+          <span style={styles.label}>
             {this.props.label}
           </span>
-          <span className={classes.value}>
+          <span style={styles.value}>
             {this.props.value}
           </span>
-          <span className={classes.removeBtn} onTouchTap={this._removeChip}>
+          <span style={styles.removeBtn} onTouchTap={this._removeChip}>
             <Close style={{verticalAlign: 'text-bottom'}}/>
           </span>
         </span>

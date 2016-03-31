@@ -1,11 +1,9 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { removeFromQuery } from '../../../redux/modules/connector'
 import Chip from './Chip'
 
-export class Chips extends React.Component {
+export default class Chips extends React.Component {
   static propTypes = {
-    removeFromQuery: PropTypes.func.isRequired,
+    onRemove: PropTypes.func.isRequired,
     query: PropTypes.array
   }
   render () {
@@ -18,17 +16,10 @@ export class Chips extends React.Component {
               {...query}
               key={index}
               index={index}
-              onRemove={this.props.removeFromQuery} />)}
+              onRemove={this.props.onRemove} />)}
         </div>
       : <div />}
       </div>
     )
   }
 }
-
-const mapStateToProps = (state) => ({
-  query: state.connector.query
-})
-export default connect((mapStateToProps), {
-  removeFromQuery
-})(Chips)
