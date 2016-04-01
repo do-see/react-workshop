@@ -12,7 +12,6 @@ export class App extends Component {
   }
 
   render () {
-    console.log(this.props);
     const { addTodo, removeTodo, todos } = this.props;
     return (
       <div>
