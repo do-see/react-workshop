@@ -1,6 +1,13 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 
+/**
+ *
+ */
 export default class TodoInputFields extends Component {
+
+  static propTypes = {
+    onClick: PropTypes.func.isRequired
+  }
 
   constructor (props) {
     super(props)
@@ -13,17 +20,17 @@ export default class TodoInputFields extends Component {
     this.setState({textValue: event.target.value})
   }
 
-  render(){
+  render () {
     return (
       <form>
-        <input type="text" onChange={this._onChange} value={this.state.textValue} />
-        <input type="button" value="add" onClick={this._onClick} />
+        <input type='text' onChange={this._onChange} value={this.state.textValue} />
+        <input type='button' value='add' onClick={this._onClick} />
       </form>
     )
   }
 
   initializeTextValue () {
-    return { textValue: ''}
+    return { textValue: '' }
   }
 
   onClick () {
