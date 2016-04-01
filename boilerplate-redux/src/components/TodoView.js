@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component, PropTypes} from 'react';
 
 /**
  * renders a list of all todo items
@@ -19,7 +19,7 @@ export default class TodoView extends Component {
           }
         </ol>
       </div>
-    )
+    );
   }
 }
 
@@ -35,12 +35,12 @@ export class TodoItem extends Component {
   }
 
   constructor (props) {
-    super(props)
-    this.onClickAction = this.onClick.bind(this)
+    super(props);
+    this.onClickAction = this.onClick.bind(this);
   }
 
   onClick () {
-    this.props.onClick(this.props.itemId)
+    this.props.onClick(this.props.itemId);
   }
 
   render () {
@@ -48,7 +48,7 @@ export class TodoItem extends Component {
       <li onTouchTap={this.onClickAction}>
         {this.props.todo}
       </li>
-    )
+    );
   }
 
 }
