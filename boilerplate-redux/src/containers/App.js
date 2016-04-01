@@ -13,10 +13,11 @@ export class App extends Component {
 
   render () {
     console.log(this.props);
+    const { addTodo, removeTodo, todos } = this.props;
     return (
       <div>
-        <TodoInputFields onClick={this.props.addTodo}/>
-        <TodoView todos={this.props.todos} onItemClick={this.props.removeTodo}/>
+        <TodoInputFields onClick={addTodo}/>
+        <TodoView todos={todos} onItemClick={removeTodo}/>
       </div>);
   }
 }
@@ -26,5 +27,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect((mapStateToProps), {
-  addTodo, removeTodo
+  addTodo,
+  removeTodo
 })(App);

@@ -1,4 +1,3 @@
-
 export const ADD_TO_TODO = 'ADD_TO_TODO';
 export const REMOVE_FROM_TODO = 'REMOVE_FROM_TODO';
 
@@ -26,9 +25,10 @@ const ACTION_HANDLERS = {
     (state, action) => ({ ...state, todos: [...state.todos, action.payload] }),
   [REMOVE_FROM_TODO]:
     (state, action) => {
-      const todos = state.todos;
-      todos.splice(action.id, 1);
-      return {...state, todos};
+      return {...state, todos: [
+        ...state.todos.slice(0, action.id),
+        ...state.todos.slice(action.id + 1)
+      ]};
     }
 };
 
