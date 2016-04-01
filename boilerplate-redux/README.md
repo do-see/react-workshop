@@ -1,4 +1,4 @@
-# Kundenportal
+# Kundenportal Frontend
 Beschreibung auf 2-5 Zeilen!
 
 # Installation
